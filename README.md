@@ -31,6 +31,18 @@ python reproduce.py
 
 That's it. Watch DMRG find ground states of quantum systems.
 
+## 📦 Installation
+
+No account or package manager required. Install directly from source:
+
+```bash
+pip install git+https://github.com/tigantic/PyTenNet.git@v0.2.0
+```
+
+**Why this is better:**
+- **Zero Maintenance:** No uploads to package registries. Just push code to GitHub.
+- **Always Fresh:** Users get the exact code you wrote, not a stale packaged version.
+
 ## 🎯 What You Get
 
 | Feature | Status |
