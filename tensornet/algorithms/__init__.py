@@ -5,6 +5,13 @@ from tensornet.algorithms.tebd import tebd
 from tensornet.algorithms.lanczos import lanczos_ground_state
 from tensornet.algorithms.idmrg import idmrg, iMPS, iMPO
 from tensornet.algorithms.tdvp import tdvp, tdvp2, tdvp_ground_state
+from tensornet.algorithms.excited import (
+    find_excited_states,
+    find_ground_state,
+    spectral_gap,
+    estimate_gap_from_dmrg,
+    energy_variance,
+)
 
 __all__ = [
     "dmrg",
@@ -17,4 +24,9 @@ __all__ = [
     "tdvp",
     "tdvp2",
     "tdvp_ground_state",
+    "find_excited_states",
+    "find_ground_state",
+    "spectral_gap",
+    "estimate_gap_from_dmrg",
+    "energy_variance",
 ]
