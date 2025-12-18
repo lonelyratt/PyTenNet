@@ -11,6 +11,7 @@ import math
 
 from tensornet.mps.mps import MPS
 from tensornet.core.decompositions import svd_truncated
+from typing import List, Optional, Tuple
 
 
 def tebd(
@@ -226,11 +227,91 @@ def _apply_two_site_gate(
     
     # Split back
     A1_new = U.reshape(chi_l, d, chi_new)
-    A2_new = (torch.diag(S) @ Vh).reshape(chi_new, d, chi_r)
+    A2_new = (torch.diag(S.to(Vh.dtype)) @ Vh).reshape(chi_new, d, chi_r)
     
     mps.tensors[site] = A1_new
     mps.tensors[site + 1] = A2_new
 
+
+
+
+def heisenberg_gates(L: int, J: float = 1.0, Jz: float = None, dt: float = 0.1) -> List[Tensor]:
+    """
+    Create TEBD gates for Heisenberg XXZ chain.
+    
+    Args:
+        L: Number of sites
+        J: XY coupling
+        Jz: Z coupling (defaults to J)
+        dt: Time step (for real-time evolution, use dt; for imaginary time, use -1j*dt)
+        
+    Returns:
+        List of L-1 two-site gates
+    """
+    if Jz is None:
+        Jz = J
+    
+    d = 2
+    # Build local Hamiltonian h = J/2 (S+ S- + S- S+) + Jz Sz Sz
+    Sp = torch.tensor([[0, 1], [0, 0]], dtype=torch.complex128)
+    Sm = torch.tensor([[0, 0], [1, 0]], dtype=torch.complex128)
+    Sz = torch.tensor([[0.5, 0], [0, -0.5]], dtype=torch.complex128)
+    I = torch.eye(2, dtype=torch.complex128)
+    
+    # Two-site Hamiltonian
+    h = (J/2) * (torch.einsum('ij,kl->ikjl', Sp, Sm) + torch.einsum('ij,kl->ikjl', Sm, Sp))
+    h = h + Jz * torch.einsum('ij,kl->ikjl', Sz, Sz)
+    
+    # Time evolution gate
+    U = _expm_two_site(-1j * dt * h)
+    
+    return [U for _ in range(L - 1)]
+
+
+def tfim_gates(L: int, J: float = 1.0, g: float = 1.0, dt: float = 0.1) -> List[Tensor]:
+    """
+    Create TEBD gates for transverse-field Ising model.
+    
+    H = -J sum ZZ - g sum X
+    
+    Uses Trotter decomposition: split into ZZ and X parts.
+    
+    Args:
+        L: Number of sites
+        J: Ising coupling
+        g: Transverse field
+        dt: Time step
+        
+    Returns:
+        List of L-1 two-site gates (includes single-site X terms)
+    """
+    X = torch.tensor([[0, 1], [1, 0]], dtype=torch.complex128)
+    Z = torch.tensor([[1, 0], [0, -1]], dtype=torch.complex128)
+    I = torch.eye(2, dtype=torch.complex128)
+    
+    # ZZ interaction
+    h_zz = -J * torch.einsum('ij,kl->ikjl', Z, Z)
+    
+    # Single-site X field (split between bonds)
+    h_x1 = -g * 0.5 * torch.einsum('ij,kl->ikjl', X, I)
+    h_x2 = -g * 0.5 * torch.einsum('ij,kl->ikjl', I, X)
+    
+    gates = []
+    for i in range(L - 1):
+        h_bond = h_zz.clone()
+        if i == 0:
+            h_bond = h_bond + h_x1  # Full X on first site
+        else:
+            h_bond = h_bond + 0.5 * h_x1  # Half X on left site
+        if i == L - 2:
+            h_bond = h_bond + h_x2  # Full X on last site  
+        else:
+            h_bond = h_bond + 0.5 * h_x2  # Half X on right site
+            
+        U = _expm_two_site(-1j * dt * h_bond)
+        gates.append(U)
+    
+    return gates
 
 def _expm_two_site(H: Tensor) -> Tensor:
     """

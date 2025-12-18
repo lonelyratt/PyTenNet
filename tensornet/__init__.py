@@ -40,7 +40,7 @@ from tensornet.mps.states import (
 )
 
 from tensornet.algorithms.dmrg import dmrg, dmrg_two_site
-from tensornet.algorithms.tebd import tebd
+from tensornet.algorithms.tebd import tebd, heisenberg_gates, tfim_gates, time_evolve, imaginary_time_evolution
 from tensornet.algorithms.lanczos import lanczos_ground_state
 
 __all__ = [
@@ -69,5 +69,9 @@ __all__ = [
     "dmrg",
     "dmrg_two_site",
     "tebd",
+    "heisenberg_gates",
+    "tfim_gates",
+    "time_evolve",
+    "imaginary_time_evolution",
     "lanczos_ground_state",
 ]
