@@ -1,0 +1,9 @@
+# Core dependency
+git+https://github.com/tigantic/PytorchTN.git
+
+# PyTorch (user should install appropriate version for their system)
+torch>=2.0.0
+
+# For comparison benchmarks (optional)
+# tenpy>=1.0.0
+# numpy>=1.20.0
