@@ -13,12 +13,12 @@ A complete, self-contained tensor network library. No external dependencies beyo
 
 ## ⚡ 30-Second Start
 
-`ash
+```bash
 git clone https://github.com/tigantic/tensornet-1hour.git
 cd tensornet-1hour
 pip install torch
 python reproduce.py
-`
+```
 
 That's it. Watch DMRG find ground states of quantum systems.
 
@@ -64,92 +64,95 @@ Ground state energies match to machine precision:
 
 16 tests verify correctness at the linear algebra level:
 
-`
+```
 ✅ SVD truncation optimality (Eckart-Young)     error: 0
 ✅ QR orthogonality                             error: 8.9e-15
 ✅ MPS ↔ tensor round-trip                      error: 1.3e-15
 ✅ GHZ state entropy = ln(2)                    error: 1.1e-16
 ✅ Pauli algebra [X,Y] = 2iZ                    error: 0
 ✅ Lanczos vs exact diagonalization             error: 6.2e-15
-`
+```
 
 📄 **[Full Proof Report →](proofs/PROOF_EVIDENCE.md)**
 
 ## 💻 Code Examples
 
 ### DMRG Ground State
-`python
+
+```python
 from tensornet import dmrg, heisenberg_mpo, MPS
 
 H = heisenberg_mpo(L=20, J=1.0)
 psi = MPS.random(L=20, d=2, chi=32)
 psi, E, info = dmrg(psi, H, num_sweeps=10, chi_max=64)
 print(f"E = {E:.8f}")  # E = -8.68242766
-`
+```
 
 ### Entanglement Entropy
-`python
+
+```python
 from tensornet import ghz_mps
 import math
 
 ghz = ghz_mps(L=10)
 S = ghz.entropy(bond=4)
 print(f"S = {S:.6f} (exact: {math.log(2):.6f})")
-`
+```
 
 ### Custom Hamiltonian
-`python
+
+```python
 from tensornet import bose_hubbard_mpo, MPS, dmrg
 
 H = bose_hubbard_mpo(L=8, n_max=3, t=1.0, U=2.0, mu=1.0)
 psi = MPS.random(L=8, d=4, chi=32)
 psi, E, _ = dmrg(psi, H, num_sweeps=20, chi_max=64)
-`
+```
 
-## 🏗️ Architecture
+## ��️ Architecture
 
-`
-tensornet/           # 2,700 lines total
-├── core/            # 333 LOC
-│   ├── decompositions.py    # SVD, QR, polar decomposition
-│   └── contractions.py      # Tensor network contractions
-├── mps/             # 1,200 LOC  
-│   ├── mps.py               # Matrix Product State
-│   ├── mpo.py               # Matrix Product Operator
-│   ├── hamiltonians.py      # Heisenberg, TFIM, Bose-Hubbard
-│   └── states.py            # GHZ, product states
-└── algorithms/      # 750 LOC
-    ├── dmrg.py              # Two-site DMRG
-    ├── lanczos.py           # Iterative eigensolver
-    └── tebd.py              # Time evolution
-`
+```
+tensornet/                    # 2,700 lines total
+├── core/                     # 333 LOC
+│   ├── decompositions.py     # SVD, QR, polar decomposition
+│   └── contractions.py       # Tensor network contractions
+├── mps/                      # 1,200 LOC
+│   ├── mps.py                # Matrix Product State
+│   ├── mpo.py                # Matrix Product Operator
+│   ├── hamiltonians.py       # Heisenberg, TFIM, Bose-Hubbard
+│   └── states.py             # GHZ, product states
+└── algorithms/               # 750 LOC
+    ├── dmrg.py               # Two-site DMRG
+    ├── lanczos.py            # Iterative eigensolver
+    └── tebd.py               # Time evolution
+```
 
 ## 🤔 FAQ
 
-**Why should I use this instead of TeNPy?**
+**Why should I use this instead of TeNPy?**  
 → If you want to *understand* tensor networks, not just use them.
 
-**Is this fast enough for research?**
+**Is this fast enough for research?**  
 → For chains up to L~100 with χ~256, absolutely.
 
-**GPU support?**
-→ Yes. Just use device='cuda' when creating tensors.
+**GPU support?**  
+→ Yes. Just use `device='cuda'` when creating tensors.
 
-**What's missing?**
+**What's missing?**  
 → Infinite MPS (iDMRG), fermion signs, excited states, TDVP. Coming soon.
 
 ## 📚 Citation
 
-`ibtex
+```bibtex
 @software{tensornet1hour2025,
   author = {Tigantic},
   title = {Tensor Networks in PyTorch: 1-Hour Implementation},
   year = {2025},
   url = {https://github.com/tigantic/tensornet-1hour}
 }
-`
+```
 
-## 📜 License
+## �� License
 
 MIT - do whatever you want.
 
