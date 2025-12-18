@@ -9,7 +9,7 @@
 
 > **2,700 lines. 16 proofs. Zero excuses.**
 
-A complete, self-contained tensor network library. No external dependencies beyond PyTorch. Just clone and run.
+A complete tensor network library for quantum simulation in pure PyTorch. No external dependencies beyond PyTorch. Just clone and run.
 
 ## ⚡ 30-Second Start
 
@@ -159,5 +159,6 @@ MIT - do whatever you want.
 ---
 
 **Built with 🔥 PyTorch and pure determination.**
+
 
 
