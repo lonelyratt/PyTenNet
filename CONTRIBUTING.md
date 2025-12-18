@@ -1,12 +1,12 @@
-# Contributing to TensorNet
+# Contributing to PyTenNet
 
 Thanks for your interest! Here's how to contribute.
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/tigantic/tensornet-1hour.git
-cd tensornet-1hour
+git clone https://github.com/tigantic/PyTenNet.git
+cd PyTenNet
 pip install torch pytest
 python -m pytest  # Run tests
 ```

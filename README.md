@@ -1,7 +1,7 @@
-# Tensor Networks in PyTorch: 1-Hour Implementation
+# PyTenNet: Tensor Networks in Pure PyTorch
 
-[![Reproduce](https://github.com/tigantic/tensornet-1hour/actions/workflows/reproduce.yml/badge.svg)](https://github.com/tigantic/tensornet-1hour/actions/workflows/reproduce.yml)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/tensornet-1hour/blob/main/notebooks/demo.ipynb)
+[![Reproduce](https://github.com/tigantic/PyTenNet/actions/workflows/reproduce.yml/badge.svg)](https://github.com/tigantic/PyTenNet/actions/workflows/reproduce.yml)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/main/notebooks/demo.ipynb)
 [![Proofs](https://img.shields.io/badge/proofs-16%2F16%20passed-brightgreen)](proofs/PROOF_EVIDENCE.md)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
@@ -14,8 +14,8 @@ A complete, self-contained tensor network library. No external dependencies beyo
 ## ⚡ 30-Second Start
 
 ```bash
-git clone https://github.com/tigantic/tensornet-1hour.git
-cd tensornet-1hour
+git clone https://github.com/tigantic/PyTenNet.git
+cd PyTenNet
 pip install torch
 python reproduce.py
 ```
@@ -40,11 +40,11 @@ That's it. Watch DMRG find ground states of quantum systems.
 
 | Library | Language | DMRG L=20 | DMRG L=50 | Learning Curve |
 |---------|----------|-----------|-----------|----------------|
-| **tensornet** | Python | 0.8s | 12s | 📗 Easy |
+| **PyTenNet** | Python | 0.8s | 12s | 📗 Easy |
 | TeNPy | Python/C | 0.6s | 8s | 📙 Medium |
 | ITensor | C++/Julia | 0.3s | 5s | 📕 Hard |
 
-**tensornet is ~1.5x slower but infinitely more readable.**
+**PyTenNet is ~1.5x slower but infinitely more readable.**
 
 *Benchmark: Heisenberg XXX, χ=64, 10 sweeps, CPU (Apple M1)*
 
@@ -52,7 +52,7 @@ That's it. Watch DMRG find ground states of quantum systems.
 
 Ground state energies match to machine precision:
 
-| Model | L | χ | tensornet | TeNPy | Error |
+| Model | L | χ | PyTenNet | TeNPy | Error |
 |-------|---|---|-----------|-------|-------|
 | Heisenberg | 10 | 32 | -4.25803521 | -4.25803521 | <10⁻¹⁵ |
 | Heisenberg | 20 | 64 | -8.68242766 | -8.68242766 | <10⁻⁶ |
@@ -109,7 +109,7 @@ psi = MPS.random(L=8, d=4, chi=32)
 psi, E, _ = dmrg(psi, H, num_sweeps=20, chi_max=64)
 ```
 
-## ��️ Architecture
+## 🏗️ Architecture
 
 ```
 tensornet/                    # 2,700 lines total
@@ -144,15 +144,15 @@ tensornet/                    # 2,700 lines total
 ## 📚 Citation
 
 ```bibtex
-@software{tensornet1hour2025,
+@software{pytennet2025,
   author = {Tigantic},
-  title = {Tensor Networks in PyTorch: 1-Hour Implementation},
+  title = {PyTenNet: Tensor Networks in Pure PyTorch},
   year = {2025},
-  url = {https://github.com/tigantic/tensornet-1hour}
+  url = {https://github.com/tigantic/PyTenNet}
 }
 ```
 
-## �� License
+## 📜 License
 
 MIT - do whatever you want.
 
