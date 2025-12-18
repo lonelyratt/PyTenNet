@@ -30,10 +30,10 @@ def main():
     torch.manual_seed(42)
     
     for L in [6, 8, 10, 12, 14]:
-        H = heisenberg_mpo(n_sites=L, J=1.0, h=0.0)
-        psi = MPS.random(n_sites=L, phys_dim=2, bond_dim=32)
+        H = heisenberg_mpo(L=L, J=1.0, h=0.0)
+        psi = MPS.random(L=L, d=2, chi=32)
         
-        psi_opt, E, info = dmrg(H, psi, max_sweeps=20, tol=1e-10, verbose=False)
+        psi_opt, E, info = dmrg(psi, H, num_sweeps=20, chi_max=32, tol=1e-10)
         
         exact = exact_heisenberg_E0(L)
         if exact:

@@ -152,11 +152,11 @@ from tensornet import dmrg, heisenberg_mpo, MPS
 
 # Your system
 L = 30
-H = heisenberg_mpo(n_sites=L, J=1.0)
-psi = MPS.random(n_sites=L, phys_dim=2, bond_dim=64)
+H = heisenberg_mpo(L=L, J=1.0)
+psi = MPS.random(L=L, d=2, chi=64)
 
 # Run DMRG
-psi, E, info = dmrg(H, psi, max_sweeps=20, tol=1e-10)
+psi, E, info = dmrg(psi, H, num_sweeps=20, chi_max=64, tol=1e-10)
 print(f"Ground state energy: {E/L:.8f} per site")
 ```
 

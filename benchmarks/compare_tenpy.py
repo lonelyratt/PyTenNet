@@ -35,11 +35,11 @@ except ImportError:
 def run_tensornet(L: int, chi: int) -> tuple[float, float]:
     """Run tensornet DMRG, return (energy, time)."""
     torch.manual_seed(42)
-    H = heisenberg_mpo(n_sites=L, J=1.0, h=0.0)
-    psi = MPS.random(n_sites=L, phys_dim=2, bond_dim=chi)
+    H = heisenberg_mpo(L=L, J=1.0, h=0.0)
+    psi = MPS.random(L=L, d=2, chi=chi)
     
     t0 = time.time()
-    _, E, _ = dmrg(H, psi, max_sweeps=20, tol=1e-10, verbose=False)
+    _, E, _ = dmrg(psi, H, num_sweeps=20, chi_max=chi, tol=1e-10)
     elapsed = time.time() - t0
     
     return float(E), elapsed

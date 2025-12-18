@@ -29,14 +29,14 @@ def exact_tfim_E0(L: int, h: float) -> float:
 def main():
     torch.manual_seed(42)
     
-    print("TFIM at critical point h=1.0:")
+    print("TFIM at critical point g=1.0:")
     print("-" * 50)
     
     for L in [6, 8, 10, 12]:
-        H = tfim_mpo(n_sites=L, J=1.0, h=1.0)
-        psi = MPS.random(n_sites=L, phys_dim=2, bond_dim=32)
+        H = tfim_mpo(L=L, J=1.0, g=1.0)
+        psi = MPS.random(L=L, d=2, chi=32)
         
-        psi_opt, E, info = dmrg(H, psi, max_sweeps=20, tol=1e-10, verbose=False)
+        psi_opt, E, info = dmrg(psi, H, num_sweeps=20, chi_max=32, tol=1e-10)
         
         exact = exact_tfim_E0(L, 1.0)
         if exact:
@@ -46,14 +46,14 @@ def main():
             print(f"L={L:2d}: E = {E:.10f}")
     
     print()
-    print("TFIM in ordered phase h=0.5:")
+    print("TFIM in ordered phase g=0.5:")
     print("-" * 50)
     
     for L in [6, 8, 10, 12]:
-        H = tfim_mpo(n_sites=L, J=1.0, h=0.5)
-        psi = MPS.random(n_sites=L, phys_dim=2, bond_dim=32)
+        H = tfim_mpo(L=L, J=1.0, g=0.5)
+        psi = MPS.random(L=L, d=2, chi=32)
         
-        psi_opt, E, info = dmrg(H, psi, max_sweeps=20, tol=1e-10, verbose=False)
+        psi_opt, E, info = dmrg(psi, H, num_sweeps=20, chi_max=32, tol=1e-10)
         print(f"L={L:2d}: E = {E:.10f}")
 
 
