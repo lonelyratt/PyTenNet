@@ -92,7 +92,7 @@ def qr_stable(A: Tensor) -> Tuple[Tensor, Tensor]:
     Q, R = torch.linalg.qr(A, mode='reduced')
     
     # Fix signs for uniqueness (positive diagonal of R)
-    signs = torch.sign(torch.diag(R))
+    signs = torch.sgn(torch.diag(R))
     signs[signs == 0] = 1
     
     Q = Q * signs.unsqueeze(0)
