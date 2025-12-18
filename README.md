@@ -1,17 +1,26 @@
 # PyTenNet: Tensor Networks in Pure PyTorch
 
-[![Reproduce](https://github.com/tigantic/PyTenNet/actions/workflows/reproduce.yml/badge.svg)](https://github.com/tigantic/PyTenNet/actions/workflows/reproduce.yml)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/master/)
-[![Proofs](https://img.shields.io/badge/proofs-16%2F16%20passed-brightgreen)](proofs/PROOF_EVIDENCE.md)
+[![CI](https://github.com/tigantic/PyTenNet/actions/workflows/ci.yml/badge.svg)](https://github.com/tigantic/PyTenNet/actions/workflows/ci.yml)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/main/notebooks/demo.ipynb)
+[![Proofs](https://img.shields.io/badge/proofs-21%2F21%20passed-brightgreen)](proofs/PROOF_EVIDENCE.md)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **2,700 lines. 16 proofs. Zero excuses.**
+> **2,700 lines. 21 proofs. Zero excuses.**
 
 A complete tensor network library for quantum simulation in pure PyTorch. No external dependencies beyond PyTorch. Just clone and run.
 
-## ⚡ 30-Second Start
+## ⚡ Instant Demo (Run in Browser)
+
+| Experiment | Description | Launch |
+| :--- | :--- | :--- |
+| **30-Second Start** | Zero-to-DMRG in 30 seconds. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/main/notebooks/demo.ipynb) |
+| **Phase Transition** | Visualize Quantum Criticality in Ising Model. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/main/notebooks/tfim_phase_transition.ipynb) |
+| **Convergence** | See how energy accuracy scales with compute. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/main/notebooks/heisenberg_convergence.ipynb) |
+| **Bose-Hubbard** | **New:** Superfluid-to-Mott Insulator transition. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/main/notebooks/bose_hubbard.ipynb) |
+
+## 🚀 30-Second Start
 
 ```bash
 git clone https://github.com/tigantic/PyTenNet.git
