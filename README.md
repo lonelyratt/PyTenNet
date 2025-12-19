@@ -28,6 +28,7 @@ A complete tensor network library for quantum simulation in pure PyTorch. No ext
 | **Phase Transition** | Visualize Quantum Criticality in Ising Model. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/master/notebooks/tfim_phase_transition.ipynb) |
 | **Convergence** | See how energy accuracy scales with compute. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/master/notebooks/heisenberg_convergence.ipynb) |
 | **Bose-Hubbard** | **New:** Superfluid-to-Mott Insulator transition. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/master/notebooks/bose_hubbard.ipynb) |
+| **TEBD Dynamics** | Time evolution of quantum spin chains. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tigantic/PyTenNet/blob/master/notebooks/tebd_dynamics.ipynb) |
 
 ## 🚀 30-Second Start
 
@@ -189,6 +190,7 @@ MIT - do whatever you want.
 ---
 
 **Built with 🔥 PyTorch and pure determination.**
+
 
 
 
