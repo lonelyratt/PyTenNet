@@ -275,7 +275,7 @@ If you use PyTenNet in your research, please cite:
   title = {PyTenNet: Tensor Networks in Pure PyTorch},
   author = {Tigantic Labs},
   url = {https://github.com/tigantic/PyTenNet},
-  year = {2024}
+  year = {2025}
 }
 ```
 
